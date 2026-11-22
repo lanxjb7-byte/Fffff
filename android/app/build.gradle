@@ -1,0 +1,38 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.gms.google-services'
+}
+android {
+    namespace 'com.lixxzy.rat'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.lixxzy.rat'
+        minSdk 23
+        targetSdk 35
+        versionCode 1
+        versionName '1.0'
+    }
+    flavorDimensions += 'role'
+    productFlavors {
+        agent {
+            dimension 'role'
+            applicationId 'com.lixxzy.rat.agent'
+            resValue 'string', 'app_name', 'LIXXZY Agent'
+            buildConfigField 'boolean', 'IS_AGENT', 'true'
+        }
+        controller {
+            dimension 'role'
+            applicationId 'com.lixxzy.rat.controller'
+            resValue 'string', 'app_name', 'LIXXZY Controller'
+            buildConfigField 'boolean', 'IS_AGENT', 'false'
+        }
+    }
+    buildFeatures { buildConfig true }
+}
+dependencies {
+    implementation platform('com.google.firebase:firebase-bom:34.0.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+}
